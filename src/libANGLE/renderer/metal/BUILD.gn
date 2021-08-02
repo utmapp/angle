@@ -128,5 +128,10 @@ angle_source_set("angle_metal_backend") {
     ]
   }
 
-  # TODO(hqle): iOS support.
+  if (is_ios) {
+    frameworks = [
+      "IOSurface.framework",
+      "QuartzCore.framework",
+    ]
+  }
 }
