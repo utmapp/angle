@@ -1269,12 +1269,13 @@ if (angle_enable_vulkan) {
 }
 
 config("shared_library_public_config") {
-  if (is_mac && !is_component_build) {
+  if ((is_ios || is_mac) && !is_component_build) {
     # Executable targets that depend on the shared libraries below need to have
     # the rpath setup in non-component build configurations.
     ldflags = [
       "-rpath",
       "@executable_path/",
+      "-headerpad_max_install_names",
     ]
     if (build_with_chromium) {
       ldflags += [
@@ -1307,6 +1308,8 @@ if (is_android && is_component_build) {
 
 if (angle_expose_wgl_entry_points) {
   _angle_glesv2_library_name = "opengl32${angle_libs_suffix}${_cr_suffix}"
+} else if (is_apple) {
+  _angle_glesv2_library_name = "GLESv2${angle_libs_suffix}"
 } else {
   _angle_glesv2_library_name = "libGLESv2${angle_libs_suffix}${_cr_suffix}"
 }
@@ -1314,7 +1317,11 @@ _angle_glesv2_vulkan_secondaries_library_name =
     "libGLESv2_vulkan_secondaries${angle_libs_suffix}${_cr_suffix}"
 
 config("library_name_config") {
-  _egllib = "libEGL${angle_libs_suffix}${_cr_suffix}"
+  if (is_apple) {
+    _egllib = "EGL${angle_libs_suffix}"
+  } else {
+    _egllib = "libEGL${angle_libs_suffix}${_cr_suffix}"
+  }
   _vk2egllib = "libEGL_vulkan_secondaries${angle_libs_suffix}${_cr_suffix}"
   defines = [
     "ANGLE_EGL_LIBRARY_NAME=\"${_egllib}\"",
