@@ -1604,13 +1604,16 @@ angle::Result ContextMtl::memoryBarrier(const gl::Context *context, GLbitfield b
     {
         case GL_ALL_BARRIER_BITS:
             scope = MTLBarrierScopeTextures | MTLBarrierScopeBuffers;
+#if TARGET_OS_OSX
             if (getDisplay()->hasFragmentMemoryBarriers())
             {
                 scope |= mtl::kBarrierScopeRenderTargets;
             }
+#endif
             break;
         case GL_SHADER_IMAGE_ACCESS_BARRIER_BIT:
             scope = MTLBarrierScopeTextures;
+#if TARGET_OS_OSX
             if (getDisplay()->hasFragmentMemoryBarriers())
             {
                 // SHADER_IMAGE_ACCESS_BARRIER_BIT (and SHADER_STORAGE_BARRIER_BIT) require that all
@@ -1623,6 +1626,7 @@ angle::Result ContextMtl::memoryBarrier(const gl::Context *context, GLbitfield b
                 // local storage instead of read_write textures anyway.
                 scope |= mtl::kBarrierScopeRenderTargets;
             }
+#endif
             break;
         default:
             UNIMPLEMENTED();
