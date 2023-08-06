@@ -712,6 +712,7 @@ template("translator_lib") {
       }
 
       if (angle_enable_metal) {
+        _needs_glsl_base = true
         sources += angle_translator_lib_metal_sources
         defines += [ "ANGLE_ENABLE_METAL" ]
         if (angle_enable_msl_through_spirv) {
