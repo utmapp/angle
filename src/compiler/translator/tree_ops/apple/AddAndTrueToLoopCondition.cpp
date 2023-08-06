@@ -6,6 +6,7 @@
 
 #include "compiler/translator/tree_ops/apple/AddAndTrueToLoopCondition.h"
 
+#if defined(ANGLE_ENABLE_GLSL) && defined(ANGLE_ENABLE_APPLE_WORKAROUNDS)
 #include "compiler/translator/Compiler.h"
 #include "compiler/translator/tree_util/IntermNode_util.h"
 #include "compiler/translator/tree_util/IntermTraverse.h"
@@ -58,3 +59,4 @@ bool AddAndTrueToLoopCondition(TCompiler *compiler, TIntermNode *root)
 }
 
 }  // namespace sh
+#endif // defined(ANGLE_ENABLE_GLSL) && defined(ANGLE_ENABLE_APPLE_WORKAROUNDS)

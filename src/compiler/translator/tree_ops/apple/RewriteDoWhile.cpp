@@ -9,6 +9,7 @@
 
 #include "compiler/translator/tree_ops/apple/RewriteDoWhile.h"
 
+#if defined(ANGLE_ENABLE_GLSL) && defined(ANGLE_ENABLE_APPLE_WORKAROUNDS)
 #include "compiler/translator/Compiler.h"
 #include "compiler/translator/StaticType.h"
 #include "compiler/translator/tree_util/IntermNode_util.h"
@@ -145,3 +146,4 @@ bool RewriteDoWhile(TCompiler *compiler, TIntermNode *root, TSymbolTable *symbol
 }
 
 }  // namespace sh
+#endif // defined(ANGLE_ENABLE_GLSL) && defined(ANGLE_ENABLE_APPLE_WORKAROUNDS)

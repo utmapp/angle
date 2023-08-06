@@ -8,6 +8,8 @@
 
 #include "compiler/translator/tree_ops/apple/RewriteRowMajorMatrices.h"
 
+#if (defined(ANGLE_ENABLE_GLSL) || defined(ANGLE_ENABLE_METAL)) && \
+    defined(ANGLE_ENABLE_APPLE_WORKAROUNDS)
 #include "compiler/translator/Compiler.h"
 #include "compiler/translator/ImmutableStringBuilder.h"
 #include "compiler/translator/StaticType.h"
@@ -1593,3 +1595,5 @@ bool RewriteRowMajorMatrices(TCompiler *compiler, TIntermBlock *root, TSymbolTab
     return compiler->validateAST(root);
 }
 }  // namespace sh
+#endif // (defined(ANGLE_ENABLE_GLSL) || defined(ANGLE_ENABLE_METAL)) && 
+       //  defined(ANGLE_ENABLE_APPLE_WORKAROUNDS)

@@ -6,6 +6,7 @@
 
 #include "compiler/translator/tree_ops/apple/UnfoldShortCircuitAST.h"
 
+#if defined(ANGLE_ENABLE_GLSL) && defined(ANGLE_ENABLE_APPLE_WORKAROUNDS)
 #include "compiler/translator/IntermNode.h"
 #include "compiler/translator/tree_util/IntermNode_util.h"
 #include "compiler/translator/tree_util/IntermTraverse.h"
@@ -72,3 +73,4 @@ bool UnfoldShortCircuitAST(TCompiler *compiler, TIntermBlock *root)
 }
 
 }  // namespace sh
+#endif // defined(ANGLE_ENABLE_GLSL) && defined(ANGLE_ENABLE_APPLE_WORKAROUNDS)
